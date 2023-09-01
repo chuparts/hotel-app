@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
+  carousel_slider: ^4.2.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
@@ -18,5 +19,11 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
 
+
+
 flutter:
   uses-material-design: true
+  fonts:
+    - family: SFProDisplay
+      fonts:
+      - asset: assets/fonts/SFPRODISPLAYMEDIUM.OTF
