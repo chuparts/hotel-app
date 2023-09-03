@@ -25,6 +25,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+   - assets/icons/emoji-happy.png
+   - assets/icons/close-square.png
+   - assets/icons/tick-square.png
   fonts:
     - family: SFProDisplay
       fonts:
