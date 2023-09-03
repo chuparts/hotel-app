@@ -53,103 +53,119 @@ class _HotelMainScreenState extends State<HotelMainScreen> {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                return ListView(
-                  children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Stack(children: [
-                      Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Container(
-                              height: 257,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: PageView.builder(
-                                itemBuilder: (BuildContext context, itemIndex) {
-                                  return Image.network(
-                                    snapshot.data!.images[itemIndex],
-                                    fit: BoxFit.fill,
-                                  );
-                                },
-                                itemCount: snapshot.data!.images.length,
-                                onPageChanged: (int pos) {
-                                  setState(() {
-                                    dotPosition = pos;
-                                  });
-                                },
-                              )),
-                        ),
+                return ListView(children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 8,
                       ),
-                      Center(
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 220,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: DotsIndicator(
-                                dotsCount: snapshot.data!.images.length,
-                                position: dotPosition,
-                                decorator: const DotsDecorator(
-                                    activeColor: Colors.black),
+                      Stack(children: [
+                        Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                                height: 257,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: PageView.builder(
+                                  itemBuilder:
+                                      (BuildContext context, itemIndex) {
+                                    return Image.network(
+                                      snapshot.data!.images[itemIndex],
+                                      fit: BoxFit.fill,
+                                    );
+                                  },
+                                  itemCount: snapshot.data!.images.length,
+                                  onPageChanged: (int pos) {
+                                    setState(() {
+                                      dotPosition = pos;
+                                    });
+                                  },
+                                )),
+                          ),
+                        ),
+                        Center(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 220,
                               ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: DotsIndicator(
+                                  dotsCount: snapshot.data!.images.length,
+                                  position: dotPosition,
+                                  decorator: const DotsDecorator(
+                                      activeColor: Colors.black),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5),
+                            color: const Color(0x33FFC700)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              color: Color(0xFFFFA800),
+                              size: 15,
+                            ),
+                            Text(
+                              "${snapshot.data!.rating} ${snapshot.data!.ratingName}",
+                              style: const TextStyle(
+                                  color: Color(0xFFFFA800), fontSize: 16),
                             ),
                           ],
                         ),
                       ),
-                    ]),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: const Color(0x33FFC700)),
-                      child: Row(
+                      Text(
+                        snapshot.data!.name,
+                        style: const TextStyle(fontSize: 22),
+                      ),
+                      Text(
+                        snapshot.data!.adress,
+                        style: const TextStyle(color: Color(0xFF0D72FF)),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const Icon(
-                            Icons.star,
-                            color: Color(0xFFFFA800),
-                            size: 15,
+                          Text("От ${snapshot.data!.price.toString()} ₽",
+                              style: const TextStyle(fontSize: 30)),
+                          const SizedBox(
+                            width: 8,
                           ),
                           Text(
-                            "${snapshot.data!.rating} ${snapshot.data!.ratingName}",
+                            snapshot.data!.priceForIt,
                             style: const TextStyle(
-                                color: Color(0xFFFFA800), fontSize: 16),
-                          ),
+                                color: Color(0xFF828796), fontSize: 16),
+                          )
                         ],
                       ),
-                    ),
-                    Text(
-                      snapshot.data!.name,
-                      style: const TextStyle(fontSize: 22),
-                    ),
-                    Text(
-                      snapshot.data!.adress,
-                      style: const TextStyle(color: Color(0xFF0D72FF)),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text("От ${snapshot.data!.price.toString()} ₽",
-                            style: const TextStyle(fontSize: 30)),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          snapshot.data!.priceForIt,
-                          style: const TextStyle(
-                              color: Color(0xFF828796), fontSize: 16),
-                        )
-                      ],
-                    )
-                  ],
-                );
+                      
+                    ],
+                  ),
+                ]);
               })),
     );
   }
 }
+
+
+
+
+
+// padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(5),
+//                           color: const Color(0x33FFC700)),★
