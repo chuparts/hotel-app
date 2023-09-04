@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_app_test_exercise/getting_rooms_info.dart';
 import 'package:hotel_app_test_exercise/hotel_screen.dart';
@@ -11,8 +12,7 @@ Future<List<RoomInfo>> fetchRoomInfo() async {
 
   if (response.statusCode == 200) {
     List<RoomInfo> rooms = [];
-    for (dynamic f in jsonDecode(response.body)['rooms'])
-    {
+    for (dynamic f in jsonDecode(response.body)['rooms']) {
       rooms.add(RoomInfo.fromJson(f));
     }
     return rooms;
@@ -29,7 +29,7 @@ class RoomsPage extends StatefulWidget {
 
 class _RoomsPageState extends State<RoomsPage> {
   late final Future<List<RoomInfo>> rooms;
-  int dotPosition = 0;
+  List<int> dotPosition = [];
   @override
   void initState() {
     super.initState();
@@ -41,16 +41,19 @@ class _RoomsPageState extends State<RoomsPage> {
     return FutureBuilder(
         future: rooms,
         builder: (context, snapshot) {
-          if (!snapshot.hasData)
-          {
+          if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
+          }
+          for (int i = 0; i < snapshot.data!.length; i++)
+          {
+            dotPosition.add(0);
           }
           return Scaffold(
             appBar: AppBar(
                 elevation: 1,
                 title: Text(
                   hotelName,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 backgroundColor: Colors.white,
                 leading: IconButton(
@@ -62,8 +65,13 @@ class _RoomsPageState extends State<RoomsPage> {
                     Navigator.pop(context);
                   },
                 )),
-            body: ListView.builder(itemBuilder: (context, index) {
-              Stack(children: [
+            body: ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(children: [
                       Center(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
@@ -82,7 +90,7 @@ class _RoomsPageState extends State<RoomsPage> {
                                 itemCount: snapshot.data![index].images.length,
                                 onPageChanged: (int pos) {
                                   setState(() {
-                                    dotPosition = pos;
+                                    dotPosition[index] = pos;
                                   });
                                 },
                               )),
@@ -100,7 +108,7 @@ class _RoomsPageState extends State<RoomsPage> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: DotsIndicator(
                                 dotsCount: snapshot.data![index].images.length,
-                                position: dotPosition,
+                                position: dotPosition[index],
                                 decorator: const DotsDecorator(
                                     activeColor: Colors.black),
                               ),
@@ -108,8 +116,84 @@ class _RoomsPageState extends State<RoomsPage> {
                           ],
                         ),
                       ),
-                    ]);
-            },),
+                    ]),
+                    Text(
+                      snapshot.data![index].name,
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data![index].peculiarities.length,
+                        itemBuilder: (BuildContext context, int listIndex) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xFFFBFBFC),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Text(
+                                    snapshot
+                                        .data![index].peculiarities[listIndex]
+                                        .toString(),
+                                    style: const TextStyle(
+                                        color: Color(0xFF828796)),
+                                  )),
+                            ],
+                          );
+                        }),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5),
+                          color: const Color(0x330D72FF)),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Подробнее о номере",
+                            style: TextStyle(
+                                color: Color(0xFF0D72FF), fontSize: 16),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Color(0xFF0D72FF),
+                            size: 15,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text("${snapshot.data![index].price.toString()} ₽",
+                            style: const TextStyle(fontSize: 30)),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          snapshot.data![index].pricePer,
+                          style: const TextStyle(
+                              color: Color(0xFF828796), fontSize: 16),
+                        )
+                      ],
+                    ),
+                    Center(
+                      child: CupertinoButton.filled(
+                              padding: const EdgeInsets.fromLTRB(125, 0, 125, 0),
+                              borderRadius: BorderRadius.circular(15),
+                              onPressed: () {
+                               
+                              },
+                              child: const Text("Выбрать номер")),
+                    ),
+                  ],
+                );
+              },
+            ),
           );
         });
   }

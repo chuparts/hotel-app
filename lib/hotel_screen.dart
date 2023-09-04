@@ -181,7 +181,7 @@ class _HotelMainScreenState extends State<HotelMainScreen> {
                     ),
                     ListView.builder(
                         shrinkWrap: true,
-                        itemCount: 3,
+                        itemCount: snapshot.data!.about["peculiarities"].length,
                         itemBuilder: (BuildContext context, int index) {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,6 +242,7 @@ class _HotelMainScreenState extends State<HotelMainScreen> {
                         ),
                         CupertinoButton.filled(
                             padding: const EdgeInsets.fromLTRB(125, 0, 125, 0),
+                            borderRadius: BorderRadius.circular(15),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -257,12 +258,3 @@ class _HotelMainScreenState extends State<HotelMainScreen> {
             }));
   }
 }
-
-
-
-
-
-// padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(5),
-//                           color: const Color(0x33FFC700)),★
