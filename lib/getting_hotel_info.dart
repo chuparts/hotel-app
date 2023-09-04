@@ -1,5 +1,3 @@
-import 'package:http/http.dart' as http;
-
 class HotelInfo {
   final int id;
   final String name;
@@ -34,10 +32,5 @@ class HotelInfo {
       images: json['image_urls'],
       about: json['about_the_hotel'],
     );
-  }
-
-  Future<http.Response> fetchHotelInfo() {
-    return http.get(Uri.parse(
-        'https://run.mocky.io/v3/35e0d18e-2521-4f1b-a575-f0fe366f66e3'));
   }
 }

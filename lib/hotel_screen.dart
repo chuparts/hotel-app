@@ -7,6 +7,12 @@ import 'package:http/http.dart' as http;
 import 'package:hotel_app_test_exercise/getting_hotel_info.dart';
 import 'package:hotel_app_test_exercise/rooms.dart';
 
+
+
+late String hotelName;
+
+
+
 Future<HotelInfo> fetchHotelInfo() async {
   final response = await http.get(Uri.parse(
       'https://run.mocky.io/v3/35e0d18e-2521-4f1b-a575-f0fe366f66e3'));
@@ -70,6 +76,7 @@ class _HotelMainScreenState extends State<HotelMainScreen> {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               }
+              hotelName = snapshot.data!.name;
               return ListView(children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
