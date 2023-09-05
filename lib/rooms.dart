@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel_app_test_exercise/booking.dart';
 import 'package:hotel_app_test_exercise/getting_rooms_info.dart';
 import 'package:hotel_app_test_exercise/hotel_screen.dart';
 import 'dart:convert';
@@ -44,8 +45,7 @@ class _RoomsPageState extends State<RoomsPage> {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
-          for (int i = 0; i < snapshot.data!.length; i++)
-          {
+          for (int i = 0; i < snapshot.data!.length; i++) {
             dotPosition.add(0);
           }
           return Scaffold(
@@ -183,12 +183,15 @@ class _RoomsPageState extends State<RoomsPage> {
                     ),
                     Center(
                       child: CupertinoButton.filled(
-                              padding: const EdgeInsets.fromLTRB(125, 0, 125, 0),
-                              borderRadius: BorderRadius.circular(15),
-                              onPressed: () {
-                               
-                              },
-                              child: const Text("Выбрать номер")),
+                          padding: const EdgeInsets.fromLTRB(125, 0, 125, 0),
+                          borderRadius: BorderRadius.circular(15),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Booking()));
+                          },
+                          child: const Text("Выбрать номер")),
                     ),
                   ],
                 );

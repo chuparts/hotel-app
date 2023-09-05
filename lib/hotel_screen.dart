@@ -8,9 +8,7 @@ import 'package:hotel_app_test_exercise/getting_hotel_info.dart';
 import 'package:hotel_app_test_exercise/rooms.dart';
 
 
-
 late String hotelName;
-
 
 
 Future<HotelInfo> fetchHotelInfo() async {

@@ -1,18 +1,3 @@
-// class Rooms {
-//   final RoomInfo rooms;
-
-//   Rooms(
-//       {required this.rooms});
-
-//   factory Rooms.fromJson(Map<String, dynamic> json) {
-//     return Rooms(
-//       rooms: RoomInfo.fromJson(json['rooms']),
-//     );
-//   }
-
-// }
-
-
 class RoomInfo {
   final int id;
   final String name;
