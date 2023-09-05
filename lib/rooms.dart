@@ -123,6 +123,7 @@ class _RoomsPageState extends State<RoomsPage> {
                     ),
                     ListView.builder(
                         shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: snapshot.data![index].peculiarities.length,
                         itemBuilder: (BuildContext context, int listIndex) {
                           return Column(

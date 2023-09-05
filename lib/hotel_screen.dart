@@ -7,9 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:hotel_app_test_exercise/getting_hotel_info.dart';
 import 'package:hotel_app_test_exercise/rooms.dart';
 
-
 late String hotelName;
-
 
 Future<HotelInfo> fetchHotelInfo() async {
   final response = await http.get(Uri.parse(
@@ -178,6 +176,7 @@ class _HotelMainScreenState extends State<HotelMainScreen> {
                       style: TextStyle(fontSize: 22),
                     ),
                     ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: snapshot.data!.about["peculiarities"].length,
                         itemBuilder: (BuildContext context, int index) {
