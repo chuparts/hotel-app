@@ -25,22 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  carousel_indicator:
-    dependency: "direct main"
-    description:
-      name: carousel_indicator
-      sha256: "93019cfd05b40051663b92866d5037d98e7dffb005f6c8227c079d7e00ef152b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.6"
-  carousel_slider:
-    dependency: "direct main"
-    description:
-      name: carousel_slider
-      sha256: "9c695cc963bf1d04a47bd6021f68befce8970bcd61d24938e1fb0918cf5d9c42"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.2.1"
   characters:
     dependency: transitive
     description:
@@ -73,14 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
-  cupertino_icons:
-    dependency: transitive
-    description:
-      name: cupertino_icons
-      sha256: d57953e10f9f8327ce64a508a355f0b1ec902193f66288e8cb5070e7c47eeb2d
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.6"
   dio:
     dependency: transitive
     description:
@@ -187,46 +163,6 @@ packages:
     description:
       name: flutter_keyboard_visibility_windows
       sha256: fc4b0f0b6be9b93ae527f3d527fb56ee2d918cd88bbca438c478af7bcfd0ef73
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
-  flutter_libphonenumber:
-    dependency: "direct main"
-    description:
-      name: flutter_libphonenumber
-      sha256: "97d34b5d36ca533ca05c1f4f4686095f22214d8752b39969cbce4b102573b664"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.5"
-  flutter_libphonenumber_android:
-    dependency: transitive
-    description:
-      name: flutter_libphonenumber_android
-      sha256: "95e0379daa458e273cef4448db7ead8df5481c40d660c261cc74eff89c394b40"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
-  flutter_libphonenumber_ios:
-    dependency: transitive
-    description:
-      name: flutter_libphonenumber_ios
-      sha256: e10ac1e4f9045c7f6ba1e6475439b5f83429096a3e5f1afd9d46130fab94c4da
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.4"
-  flutter_libphonenumber_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_libphonenumber_platform_interface
-      sha256: "5ae1d2f8f19f53221b5f4d87e752a5799b7bf2670c970b3edbb73f26895442dc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
-  flutter_libphonenumber_web:
-    dependency: transitive
-    description:
-      name: flutter_libphonenumber_web
-      sha256: "271159e874f7a3b3b7a5090ff4323e6f4b0dc7552b54805e145f5e07ef01e930"
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
@@ -455,4 +391,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=3.0.6 <4.0.0"
-  flutter: ">=3.0.0"
+  flutter: ">=1.20.0"
