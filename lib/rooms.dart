@@ -50,6 +50,7 @@ class _RoomsPageState extends State<RoomsPage> {
           }
           return Scaffold(
             appBar: AppBar(
+                centerTitle: true,
                 elevation: 1,
                 title: Text(
                   hotelName,
@@ -69,131 +70,174 @@ class _RoomsPageState extends State<RoomsPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Stack(children: [
-                      Center(
-                        child: ClipRRect(
+                    Container(
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          child: Container(
-                              height: 257,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: PageView.builder(
-                                itemBuilder: (BuildContext context, itemIndex) {
-                                  return Image.network(
-                                    snapshot.data![index].images[itemIndex],
-                                    fit: BoxFit.fill,
-                                  );
-                                },
-                                itemCount: snapshot.data![index].images.length,
-                                onPageChanged: (int pos) {
-                                  setState(() {
-                                    dotPosition[index] = pos;
-                                  });
-                                },
-                              )),
-                        ),
-                      ),
-                      Center(
+                          color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              height: 220,
+                            Stack(children: [
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Container(
+                                      height: 257,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: PageView.builder(
+                                        itemBuilder:
+                                            (BuildContext context, itemIndex) {
+                                          return Image.network(
+                                            snapshot
+                                                .data![index].images[itemIndex],
+                                            fit: BoxFit.fill,
+                                          );
+                                        },
+                                        itemCount:
+                                            snapshot.data![index].images.length,
+                                        onPageChanged: (int pos) {
+                                          setState(() {
+                                            dotPosition[index] = pos;
+                                          });
+                                        },
+                                      )),
+                                ),
+                              ),
+                              Center(
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 220,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: DotsIndicator(
+                                        dotsCount:
+                                            snapshot.data![index].images.length,
+                                        position: dotPosition[index],
+                                        decorator: const DotsDecorator(
+                                            activeColor: Colors.black),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                            SizedBox(
+                              height: heightSpace1,
+                            ),
+                            Text(
+                              snapshot.data![index].name,
+                              style: const TextStyle(fontSize: 22),
+                            ),
+                            SizedBox(
+                              height: heightSpace1,
+                            ),
+                            ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount:
+                                    snapshot.data![index].peculiarities.length,
+                                itemBuilder:
+                                    (BuildContext context, int listIndex) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 5, 10, 5),
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xFFFBFBFC),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Text(
+                                            snapshot.data![index]
+                                                .peculiarities[listIndex]
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Color(0xFF828796)),
+                                          )),
+                                    ],
+                                  );
+                                }),
+                            SizedBox(
+                              height: heightSpace1,
                             ),
                             Container(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: DotsIndicator(
-                                dotsCount: snapshot.data![index].images.length,
-                                position: dotPosition[index],
-                                decorator: const DotsDecorator(
-                                    activeColor: Colors.black),
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: const Color(0x330D72FF)),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Подробнее о номере",
+                                    style: TextStyle(
+                                        color: Color(0xFF0D72FF), fontSize: 16),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Color(0xFF0D72FF),
+                                    size: 15,
+                                  ),
+                                ],
                               ),
+                            ),
+                            SizedBox(
+                              height: heightSpace2,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                    "${snapshot.data![index].price.toString()} ₽",
+                                    style: const TextStyle(fontSize: 30)),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  snapshot.data![index].pricePer,
+                                  style: const TextStyle(
+                                      color: Color(0xFF828796), fontSize: 16),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: heightSpace2,
+                            ),
+                            Center(
+                              child: CupertinoButton.filled(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(120, 0, 120, 0),
+                                  borderRadius: BorderRadius.circular(15),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Booking()));
+                                  },
+                                  child: const Text("Выбрать номер")),
                             ),
                           ],
                         ),
                       ),
-                    ]),
-                    Text(
-                      snapshot.data![index].name,
-                      style: const TextStyle(fontSize: 22),
                     ),
-                    ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: snapshot.data![index].peculiarities.length,
-                        itemBuilder: (BuildContext context, int listIndex) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xFFFBFBFC),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Text(
-                                    snapshot
-                                        .data![index].peculiarities[listIndex]
-                                        .toString(),
-                                    style: const TextStyle(
-                                        color: Color(0xFF828796)),
-                                  )),
-                            ],
-                          );
-                        }),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5),
-                          color: const Color(0x330D72FF)),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "Подробнее о номере",
-                            style: TextStyle(
-                                color: Color(0xFF0D72FF), fontSize: 16),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Color(0xFF0D72FF),
-                            size: 15,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text("${snapshot.data![index].price.toString()} ₽",
-                            style: const TextStyle(fontSize: 30)),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          snapshot.data![index].pricePer,
-                          style: const TextStyle(
-                              color: Color(0xFF828796), fontSize: 16),
-                        )
-                      ],
-                    ),
-                    Center(
-                      child: CupertinoButton.filled(
-                          padding: const EdgeInsets.fromLTRB(125, 0, 125, 0),
-                          borderRadius: BorderRadius.circular(15),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Booking()));
-                          },
-                          child: const Text("Выбрать номер")),
-                    ),
+                    SizedBox(
+                      height: heightSpace1,
+                    )
                   ],
                 );
               },

@@ -32,6 +32,7 @@ flutter:
    - assets/icons/close-square.png
    - assets/icons/tick-square.png
    - assets/icons/plus.png
+   - assets/icons/final_icon.png
   fonts:
     - family: SFProDisplay
       fonts:
