@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hotel_app_test_exercise/hotel_screen.dart';
 
 class FinalPage extends StatelessWidget {
-  const FinalPage({super.key});
+  final int dealNum;
+
+  const FinalPage({super.key, required this.dealNum});
 
   @override
   Widget build(BuildContext context) {
@@ -26,27 +28,27 @@ class FinalPage extends StatelessWidget {
               Navigator.pop(context);
             },
           )),
-      body: const SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0),
           child: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Image(image: AssetImage("assets/icons/final_icon.png")),
-              SizedBox(
+              const Image(image: AssetImage("assets/icons/final_icon.png")),
+              const SizedBox(
                 height: 32,
               ),
-              Text(
+              const Text(
                 "Ваш заказ принят в работу",
                 style: TextStyle(fontSize: 22),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               Text(
-                "Подтверждение заказа №104893 может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.",
+                "Подтверждение заказа №$dealNum может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Color(0xFF828796)),
+                style: const TextStyle(fontSize: 16, color: Color(0xFF828796)),
               )
             ]),
           ),

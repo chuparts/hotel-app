@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:hotel_app_test_exercise/final_page.dart';
 import 'package:hotel_app_test_exercise/getting_booking_info.dart';
@@ -749,10 +751,11 @@ class _BookingState extends State<Booking> {
                                         ],
                                       ));
                             } else {
+                              int dealNum = 100000 + Random().nextInt(100000);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => FinalPage()));
+                                      builder: (context) => FinalPage(dealNum: dealNum,)));
                             }
                           });
                         },
